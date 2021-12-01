@@ -2,10 +2,8 @@
     "name": "timot/src",
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "app/"
         }
     },
-    "require": {
-        "michelf/php-markdown": "^1.9"
-    }
+    "require": {    }
 }

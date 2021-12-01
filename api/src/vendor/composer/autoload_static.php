@@ -7,10 +7,6 @@ namespace Composer\Autoload;
 class ComposerStaticInitb373e9c018669f63c111bb147b5dd863
 {
     public static $prefixLengthsPsr4 = array (
-        'M' => 
-        array (
-            'Michelf\\' => 8,
-        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -18,21 +14,14 @@ class ComposerStaticInitb373e9c018669f63c111bb147b5dd863
     );
 
     public static $prefixDirsPsr4 = array (
-        'Michelf\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/michelf/php-markdown/Michelf',
-        ),
         'App\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src',
+            0 => __DIR__ . '/../..' . '/app',
         ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Michelf\\Markdown' => __DIR__ . '/..' . '/michelf/php-markdown/Michelf/Markdown.php',
-        'Michelf\\MarkdownExtra' => __DIR__ . '/..' . '/michelf/php-markdown/Michelf/MarkdownExtra.php',
-        'Michelf\\MarkdownInterface' => __DIR__ . '/..' . '/michelf/php-markdown/Michelf/MarkdownInterface.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
