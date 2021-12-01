@@ -12,6 +12,39 @@
 
 <body>
 
+    <header>
+        <div class="menu flex justify-between items-center flex-wrap">
+            <ul class="flex">
+                <li class="mr-6">
+                    <a class="text-white hover:text-yellow" href="#">Home</a>
+                </li>
+                <li class="mr-6">
+                    <a class="text-white hover:text-yellow" href="#">Write article</a>
+                </li>
+                <li class="mr-6">
+                    <a class="text-white hover:text-yellow" href="#">Post API</a>
+                </li>
+                <li class="mr-6">
+                    <a class="text-white hover:text-yellow" href="#">Comments API</a>
+                </li>
+                <li class="mr-6">
+                    <a class="text-white hover:text-yellow" href="#">User list</a>
+                </li>
+            </ul>
+            <div class="flex">
+                <input class="mr-4 searchbar" type="text" id="searchbar" name="searchbar" placeholder="Search..." />
+
+                <button class="px-4 py-2 border-solid border-2 border-white text-white"
+                        type="button">
+                    Admin
+                </button>
+                <button class="ml-4 px-4 py-2 bg-yellow-200"
+                        type="button">
+                    Logout
+                </button>
+            </div>
+    </header>
+
     <div class="content p-16">
         <section class="article bg-gray-100 p-6 w-1/3">
             <h2 class="text-3xl font-bold mb-4">Un article avec une image</h2>
@@ -39,6 +72,25 @@
                 <button class="px-4 py-2 bg-red-200 mt-6"
                         type="button">
                     Delete comment
+                </button>
+            </div>
+        </section>
+
+        <section class="add-comments bg-gray-100 p-6 w-1/3 flex flex-col">
+            <h3 class="text-xl font-bold mb-4">Écrire un commentaire</h3>
+            <div class="comments-item p-6 bg-white">
+                <div class="add-comments-item flex flex-col mb-4">
+                    <label for="author" class="mb-2">Auteur</label>
+                    <input type="text" id="author" name="author" />
+                </div>
+                <div class="add-comments-item flex flex-col">
+                    <label for="comment" class="mb-2">Commentaire</label>
+                    <textarea id="comment" name="comment" rows="4" cols="20"></textarea>
+                </div>
+                
+                <button class="px-4 py-2 bg-blue-200 mt-6"
+                        type="button">
+                    Post comment
                 </button>
             </div>
         </section>

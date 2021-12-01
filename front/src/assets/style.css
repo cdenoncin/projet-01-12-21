@@ -1,0 +1,14 @@
+.menu {
+    padding: 24px;
+    background-color: rgb(54, 54, 54);
+}
+
+input, textarea {
+    color: black;
+    background-color: rgb(238, 238, 238);
+}
+
+.searchbar {
+    padding: 0 14px;
+    background-color: white;
+}
