@@ -22,7 +22,7 @@ class PostManager extends BaseManager
             $posts[] = $post;
         }
 
-       echo  json_encode($posts);
+        return $posts;
 
     }
 }
