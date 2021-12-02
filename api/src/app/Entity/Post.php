@@ -11,19 +11,23 @@ class Post extends BaseEntity implements \JsonSerializable
     private $thumbnail_url;
     private $publication_date;
     private $author_id;
+    private $author;
 
-    /**
-     * @param $id
-     * @param $title
-     * @param $content
-     * @param $thumbnail_url
-     * @param $publication_date
-     * @param $author_id
-     */
+
     public function __construct($data)
     {
         parent::__construct($data);
+
     }
+
+    public function setAuthor($userManager) {
+        $this->author = $userManager->get($this->author_id);
+    }
+
+    public function getAuthor() {
+        return $this->author;
+    }
+
 
     /**
      * @return mixed
@@ -123,8 +127,13 @@ class Post extends BaseEntity implements \JsonSerializable
 
     public function jsonSerialize()
     {
+        return $this->getProperties();
+    }
+
+    public function getProperties() {
         return get_object_vars($this);
     }
+
 
 
 }
