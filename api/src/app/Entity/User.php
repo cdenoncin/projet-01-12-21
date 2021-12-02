@@ -17,6 +17,12 @@ class User extends BaseEntity implements  \JsonSerializable
         parent::__construct($data);
     }
 
+    public function getProperties() {
+        return get_object_vars($this);
+    }
+    
+
+
     /**
      * @return mixed
      */

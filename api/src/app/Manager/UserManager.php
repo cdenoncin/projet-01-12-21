@@ -2,46 +2,38 @@
 
 namespace App\Manager;
 
-use App\Entity\Post;
 
-class PostManager extends BaseManager
+class UserManager extends BaseManager
 {
-
-    private $userManager;
     public function __construct($database_connection)
     {
         parent::__construct($database_connection);
-
-        $this->userManager = new UserManager($database_connection);
-
     }
 
     public function getAll()
     {
-        $query = $this->database_connection->prepare("SELECT * FROM Posts");
+        $query = $this->database_connection->prepare("SELECT * FROM Users");
         $query->execute();
         $result = $query->fetchAll();
-        $posts = [];
+        $users = [];
         foreach ($result as $row) {
-            $post = new Post($row);
-            if($post->getId() !== null)
-            $post->setAuthor($this->userManager);
-            $posts[] = $post;
+            $users[] =  new \App\Entity\User($row);
         }
 
-        return $posts;
+        return $users;
     }
 
      public function get($id)
     {
-        $query = $this->database_connection->prepare("SELECT * FROM Posts where id=".$id);
+        if(empty($id)) {
+            //echo "Id must de not empty";
+            return;
+        }
+        $query = $this->database_connection->prepare("SELECT * FROM Users where id=".$id);
         $query->execute();
         $result = $query->fetchAll();
         if($result[0] !== null) {
-            $post = new Post($result[0]);
-            if($post->getId() !== null)
-            $post->setAuthor($this->userManager);
-            return $post;
+            return new \App\Entity\User($result[0]);
         } else {
             return null;
         }
@@ -50,19 +42,18 @@ class PostManager extends BaseManager
 
     public function create($args)
     {
-        if($args["title"] === null || $args["content"] === null) {
+        if($args["first_name"] === null || $args["password"] === null || $args["mail" === null]) {
             http_response_code(500);
-            echo "Aucun titre/contenu donné, il faut au moins ca pour créer un article !";
+            echo "Aucun prénom/mdp/mail donné, il faut au moins ca pour créer un utilisateur !";
             return;
         }
         if($args["id"] !== null) {
             unset($args["id"]);
         }
-
-        $post = new Post($args);
+        $user = new \App\Entity\User($args);
         try {
-            $this->database_connection->exec($this->generateCreateQuery($post, "Posts"));
-            echo "Nouvel article enregistré ! ";
+            $this->database_connection->exec($this->generateCreateQuery($user, "Users"));
+            echo "Nouvel utilsateur enregistré ! ";
         } catch(PDOException $e) {
             echo $sql . "<br>" . $e->getMessage();
         }
@@ -74,10 +65,10 @@ class PostManager extends BaseManager
             echo "Aucun id !";
             return;
         }
-        $post = new Post($args);
+        $user = new \App\Entity\User($args);
         try {
             // Prepare statement
-            $stmt = $this->database_connection->prepare($this->generateUpdateQuery($post, "Posts"));
+            $stmt = $this->database_connection->prepare($this->generateUpdateQuery($user, "Users"));
           
             // execute the query
             $stmt->execute();
@@ -94,7 +85,7 @@ class PostManager extends BaseManager
     {
         try {
             // sql to delete a record
-            $sql = "DELETE FROM Posts WHERE id=".$id;
+            $sql = "DELETE FROM Users WHERE id=".$id;
           
             // use exec() because no results are returned
             $this->database_connection->exec($sql);

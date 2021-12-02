@@ -18,14 +18,14 @@ CREATE TABLE IF NOT EXISTS Posts
     title            varchar(255),
     content          text,
     thumbnail_url    varchar(255),
-    publication_date date,
+    publication_date datetime,
     author_id        int(255),
     PRIMARY KEY (id),
     CONSTRAINT fk_author_id FOREIGN KEY (author_id)
         REFERENCES Users (id)
 );
 
-CREATE TABLE IF NOT EXISTS Comment
+CREATE TABLE IF NOT EXISTS Comments
 (
     id        int(255) AUTO_INCREMENT,
     content   text,

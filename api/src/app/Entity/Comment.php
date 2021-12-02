@@ -8,11 +8,33 @@ class Comment extends BaseEntity implements \JsonSerializable
     private $id;
     private $content;
     private $author_id;
+    private $author;
+    private $post;
     private $post_id;
 
     public function __construct($data)
     {
         parent::__construct($data);
+    }
+
+    public function getProperties() {
+        return get_object_vars($this);
+    }
+
+    public function setAuthor($userManager) {
+       $this->author = $userManager->get($this->author_id);
+    }
+
+    public function getAuthor() {
+        return $this->author;
+    }
+
+    public function setPost($postManager) {
+        $this->post = $postManager->get($this->post_id);
+    }
+
+    public function getPost() {
+        return $this->post;
     }
 
     /**
