@@ -17,9 +17,9 @@
     
     $item->id = $data->id;
     
-    if($item->deleteUser()){
+    if($item->deleteUser()) {
         echo json_encode("User deleted.");
-    } else{
+    } else {
         echo json_encode("Data could not be deleted");
     }
 ?>

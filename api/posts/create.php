@@ -22,9 +22,9 @@
     $item->password = $data->password;
     $item->created = date('Y-m-d H:i:s');
     
-    if($item->createUser()){
+    if($item->createUser()) {
         echo 'User created successfully.';
-    } else{
+    } else {
         echo 'User could not be created.';
     }
 ?>

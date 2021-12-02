@@ -17,7 +17,7 @@
   
     $item->getSingleUser();
 
-    if($item->first_name != null){
+    if($item->first_name != null) {
         // create array
         $use_arr = array(
             "id" =>  $item->id,
@@ -32,7 +32,7 @@
         echo json_encode($use_arr);
     }
       
-    else{
+    else {
         http_response_code(404);
         echo json_encode("USer not found.");
     }
