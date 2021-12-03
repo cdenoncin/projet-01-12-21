@@ -4,10 +4,11 @@ require './vendor/autoload.php';
 
 $database_connection = new \App\Database\Database();
 
+$postManager = new \App\Manager\PostManager($database_connection->connection);
+$commentManager = new \App\Manager\CommentManager($database_connection->connection);
 
-$manager = new \App\Manager\PostManager($database_connection->connection);
-
-$manager->getAll()[0];
+$postManager->getAll()[0];
+$commentManager->getAll()[0];
 
 /*
 
@@ -32,7 +33,9 @@ echo json_encode($manager->getAll(), JSON_PRETTY_PRINT);
 
 // $manager->render("Article", "article", ["articles" => $manager->getAll()[0]]);
 // $manager->render("Login", "login", ["title" => "TEST"]);
-$manager->render("Write Article", "writearticle", ["title" => "TEST"]);
+
+$postManager->render("Article", "article", ["articles" => $postManager->getAll()[0], "comments" => $commentManager->getAll()]);
+
 // $manager->render("Home Page", "homepage", ["articles" =>$manager->getAll()]);
 
 // $address =  explode("/", $_SERVER['REQUEST_URI']);
