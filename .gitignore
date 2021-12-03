@@ -2,3 +2,9 @@
 api/database/ib_logfile0
 
 .idea/
+
+*.log
+
+api/database/ibdata1
+
+src/api/database/
