@@ -5,6 +5,7 @@ namespace App\Manager;
 
 class UserManager extends BaseManager
 {
+    
     public function __construct($database_connection)
     {
         parent::__construct($database_connection);
