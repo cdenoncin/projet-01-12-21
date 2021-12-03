@@ -12,33 +12,17 @@
                 <p class="flex-1">Is Admin</p>
                 <p class="flex-1">Action</p>
             </li>
+            <?php foreach( $args["users"] as $user ) { ?>
             <li class="flex justify-between">
-                <p class="w-1/5">MyFirstName</p>
-                <p class="w-1/5">MyLastName</p>
-                <p class="w-1/5">MyEmail</p>
+                <p class="w-1/5"><?= $user->getFirstName() ?></p>
+                <p class="w-1/5"><?= $user->getLastName() ?></p>
+                <p class="w-1/5"><?= $user->getMail() ?></p>
                 <div class="w-1/5">
-                    <input type="checkbox" id="isadmin" name="isadmin" checked>
+                    <input type="checkbox" id="isadmin" name="isadmin" <?php if($user->getIsAdmin() == '1') { echo ('checked'); }  ?>>
                 </div>
                 <a href="" class="w-1/5 underline">Delete user</a>
             </li>
-            <li class="flex justify-between">
-                <p class="w-1/5">First Name</p>
-                <p class="w-1/5">Last Name</p>
-                <p class="w-1/5">Email</p>
-                <div class="w-1/5">
-                    <input type="checkbox" id="isadmin" name="isadmin">
-                </div>
-                <a href="" class="w-1/5 underline">Delete user</a>
-            </li>
-            <li class="flex justify-between">
-                <p class="w-1/5">MyFirstName</p>
-                <p class="w-1/5">MyLastName</p>
-                <p class="w-1/5">MyEmail</p>
-                <div class="w-1/5">
-                    <input type="checkbox" id="isadmin" name="isadmin">
-                </div>
-                <a href="" class="w-1/5 underline">Delete user</a>
-            </li>
+            <?php } ?>
         </ul>
     </section>
 </div>
