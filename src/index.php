@@ -18,6 +18,10 @@ echo json_encode($manager->getAll(), JSON_PRETTY_PRINT);
 //$manager->render("Article", "article", ["title" => "TEST"]);
  */
 
+$uploaddir = './img/';
+$uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
+
+
 $address =  explode("/", $_SERVER['REQUEST_URI']);
 $method =  $_SERVER['REQUEST_METHOD'];
 //echo json_encode($address);

@@ -61,20 +61,74 @@ class ApiManager {
         }
       // echo var_dump($this->manager);
         echo json_encode($this->manager->getAll());
-    
     }
 
     public function handlePost() {
-        echo "post";
-    }
-
-    public function handleDelete() {
-        echo "delete";
+       // echo print_r($_FILES["thumbnail"]);
+        if(isset($_FILES["thumbnail"])) {
+            $tmp_name = $_FILES["thumbnail"]["tmp_name"];
+            // basename() peut empêcher les attaques de système de fichiers;
+            // la validation/assainissement supplémentaire du nom de fichier peut être approprié
+            $name = basename($_FILES["thumbnail"]["name"]);
+           // echo   move_uploaded_file($tmp_name, "$uploaddir/$name");
+           $upload_dir = $_SERVER['DOCUMENT_ROOT'] . "/img/";
+            
+            if (is_dir($upload_dir) && is_writable($upload_dir)) {
+                // do upload logic here
+                $moved = move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $upload_dir . $name);
+                $_POST["thumbnail_url"] = "/img/" . $name;
+                if( $moved ) {
+                echo "Successfully uploaded";         
+                } else {
+                echo "Not uploaded because of error #".$_FILES["file"]["error"];
+                }
+            } else {
+                echo 'Upload directory is not writable, or does not exist.';
+            }
+            // Upload file
+           
+        }
+        echo json_encode($this->manager->create($_PUT));
     }
 
     public function handlePut() {
-        echo "put";
+        echo print_r($_POST);
+        if(isset($_FILES["thumbnail"])) {
+            $tmp_name = $_FILES["thumbnail"]["tmp_name"];
+            // basename() peut empêcher les attaques de système de fichiers;
+            // la validation/assainissement supplémentaire du nom de fichier peut être approprié
+            $name = basename($_FILES["thumbnail"]["name"]);
+           // echo   move_uploaded_file($tmp_name, "$uploaddir/$name");
+           $upload_dir = $_SERVER['DOCUMENT_ROOT'] . "/img/";
+            
+            if (is_dir($upload_dir) && is_writable($upload_dir)) {
+                // do upload logic here
+                $moved = move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $upload_dir . $name);
+                $_POST["thumbnail_url"] = "/img/" . $name;
+                if( $moved ) {
+                echo "Successfully uploaded";         
+                } else {
+                echo "Not uploaded because of error #".$_FILES["file"]["error"];
+                }
+            } else {
+                echo 'Upload directory is not writable, or does not exist.';
+            }
+            // Upload file
+           
+        }
+        echo json_encode($this->manager->update($_POST));
     }
+
+    public function handleDelete() {
+        if(empty($this->url[3])) {
+            echo "no id";
+            return;
+        }
+      // echo var_dump($this->manager);
+        echo json_encode($this->manager->delete($this->url[3]));
+    }
+
+
 
 }
 
