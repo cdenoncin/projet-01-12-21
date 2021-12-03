@@ -20,10 +20,10 @@ echo json_encode($manager->getAll(), JSON_PRETTY_PRINT);
 
 $address =  explode("/", $_SERVER['REQUEST_URI']);
 $method =  $_SERVER['REQUEST_METHOD'];
-echo json_encode($address);
+//echo json_encode($address);
 if($address[1] === "api") {
-    echo "api";
-    
+   // echo "api";
+    new \App\Api\ApiManager($address, $method);
 } else {
    echo "not api";
 }
