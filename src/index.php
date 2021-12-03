@@ -4,7 +4,6 @@ require './vendor/autoload.php';
 
 $database_connection = new \App\Database\Database();
 
-
 $manager = new \App\Manager\PostManager($database_connection->connection);
 
 $manager->getAll()[0];
@@ -28,19 +27,49 @@ $manager->render("Article", "article", ["articles" => $manager->getAll()[0]]);
 echo json_encode($manager->getAll(), JSON_PRETTY_PRINT);
 //$manager->render("Article", "article", ["title" => "TEST"]);
  */
+function render($title, $view, $args)
+{
+    $view = "app/views/" . $view . ".view.php";
+    ob_start();
+    require $view;
+    $content = ob_get_clean();
+
+     require  "app/views/template.php";
+}
 
 
 // $manager->render("Article", "article", ["articles" => $manager->getAll()[0]]);
 // $manager->render("Login", "login", ["title" => "TEST"]);
-$manager->render("Write Article", "writearticle", ["title" => "TEST"]);
+// $manager->render("Write Article", "writearticle", ["title" => "TEST"]);
 // $manager->render("Home Page", "homepage", ["articles" =>$manager->getAll()]);
+function error () {
+    render("Error404", "error404", ["title" => "TEST"] );
+}
+ $address =  explode("/", $_SERVER['REQUEST_URI']);
+ $method =  $_SERVER['REQUEST_METHOD'];
+ echo json_encode($address);
+ if($address[1] === "api") {
+     echo "api";
 
-// $address =  explode("/", $_SERVER['REQUEST_URI']);
-// $method =  $_SERVER['REQUEST_METHOD'];
-// echo json_encode($address);
-// if($address[1] === "api") {
-//     echo "api";
-    
-// } else {
-//    echo "not api";
-// }
+} else if ($address[1] === "article") {
+    $manager = new \App\Manager\PostManager($database_connection->connection);
+    $post= $manager->get($address[2]);
+    if (!empty($address[2]) && !empty($post)) {
+        render("Article", "article", ["articles" =>$post]);
+    } else {
+        error();
+    }
+} else if ($address[1] === "login") {
+     render("Login", "login", ["title" => "TEST"]);
+} else if ($address[1] === "admin") {
+     render("Admin", "admin", ["title" => "TEST"]);
+} else if ($address[1] === "/") {
+    var_dump(blabla);
+     render("Homepage", "homepage", ["articles" => "TEST"]);
+} else if ($address[1] === "userlist") {
+     render("Userlist", "userlist", ["title" => "TEST"]);
+} else if ($address[1] === "writearticle") {
+     render("Writearticle", "", ["title" => "TEST"]);
+} else {
+    error();
+}
