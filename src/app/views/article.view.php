@@ -12,9 +12,11 @@ $sqldate=date('d/m/Y',strtotime($postDate));
         <p class="mb-6">Le <span class="italic"><?= $sqldate ?></span></p>
         <img src="<?= $article->getThumbnailUrl()?>" alt="Mon image" class="w-full mb-6">
         <p><?= $article->getContent()?></p>
+        <!-- TODO : Dynamiser le bouton delete / Le bouton doit supprimer la ligne de la bdd -->
         <button class="px-4 py-2 bg-red-200 mt-6" type="submit">
             Delete article
         </button>
+        <!-- TODO : Dynamiser le bouton update / Le bouton doit éditer la ligne de la bdd / Ramener vers la view updatearticle-->
         <button class="ml-3 px-4 py-2 bg-yellow-200 mt-6" type="submit">
             Update article
         </button>
@@ -26,6 +28,7 @@ $sqldate=date('d/m/Y',strtotime($postDate));
         <div class="comments-item p-6 bg-white">
             <p class="mb-1">Écrit par : <span class="italic"><?= $comment->getAuthor()->getFirstName() ?> <?= $comment->getAuthor()->getLastName() ?></span></p>
             <p><?= $comment->getContent()?></p>
+            <!-- TODO : Dynamiser le bouton delete / Le bouton doit supprimer la ligne de la bdd -->
             <button class="px-4 py-2 bg-red-200 mt-6" type="submit">
                 Delete comment
             </button>
@@ -38,6 +41,7 @@ $sqldate=date('d/m/Y',strtotime($postDate));
         <div class="comments-item p-6 bg-white">
             <form>
                 <div class="add-comments-item flex flex-col mb-4">
+                    <!-- TODO : Dynamiser les auteurs / commentaires à ajouter : si log prend automatiquement le nom du user, sinon renvoie à la page de login -->
                     <label for="author" class="mb-2">Auteur</label>
                     <input type="text" id="author" name="author" />
                 </div>
@@ -45,7 +49,7 @@ $sqldate=date('d/m/Y',strtotime($postDate));
                     <label for="comment" class="mb-2">Commentaire</label>
                     <textarea id="comment" name="comment" rows="4" cols="20"></textarea>
                 </div>
-
+                <!-- TODO : Dynamiser le bouton post / Le bouton doit ajouter la ligne dans la bdd -->
                 <button class="px-4 py-2 bg-blue-200 mt-6" type="submit">
                     Post comment
                 </button>

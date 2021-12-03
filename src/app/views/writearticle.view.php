@@ -5,16 +5,16 @@
             <form>
                 <div class="add-article-item flex flex-col mb-4">
                     <label for="title" class="mb-2">Titre</label>
-                    <input type="text" id="title" name="title" />
+                    <input required="required" type="text" id="title" name="title" />
                 </div>
                 <div class="add-article-item flex flex-col mb-4">
                     <label for="content" class="mb-2">Contenu de l'article / Description</label>
-                    <textarea id="content" name="content" rows="5" cols="20"></textarea>
+                    <textarea required="required" id="content" name="content" rows="5" cols="20"></textarea>
                 </div>
 
                 <div class="add-article-item flex flex-col">
                     <label for="image" class="mb-2">Image de l'article</label>
-                    <input class="bg-white" type="file" id="image" name="image">
+                    <input required="required" class="bg-white" type="file" id="image" name="image">
                 </div>
 
                 <button class="px-4 py-2 bg-blue-200 mt-6" type="sumbit">
