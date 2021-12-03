@@ -1,7 +1,7 @@
 <?php
 
 require './vendor/autoload.php';
-
+/* 
 $database_connection = new \App\Database\Database();
 
 
@@ -16,3 +16,13 @@ $manager = new \App\Manager\PostManager($database_connection->connection);
 //$manager->delete(3);
 echo json_encode($manager->getAll(), JSON_PRETTY_PRINT);
 //$manager->render("Article", "article", ["title" => "TEST"]);
+ */
+
+$page = $_GET['page'] ?? '404';
+echo $page;
+if ($page === 'test') {
+    // require '../../api/src/Test.php';
+}
+else if ($page === '404') {
+  //  require 'front/errors404.php';
+}
