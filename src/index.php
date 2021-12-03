@@ -30,8 +30,8 @@ echo json_encode($manager->getAll(), JSON_PRETTY_PRINT);
  */
 
 
-$manager->render("Article", "article", ["articles" => $manager->getAll()[0]]);
-
+// $manager->render("Article", "article", ["articles" => $manager->getAll()[0]]);
+$manager->render("Login", "login", ["title" => "TEST"]);
 
 // $address =  explode("/", $_SERVER['REQUEST_URI']);
 // $method =  $_SERVER['REQUEST_METHOD'];
