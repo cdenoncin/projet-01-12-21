@@ -1,0 +1,29 @@
+.menu {
+    padding: 24px;
+    background-color: rgb(54, 54, 54);
+}
+
+input, textarea {
+    padding: 10px;
+    color: black;
+    background-color: rgb(238, 238, 238);
+}
+
+.searchbar {
+    padding: 0 14px;
+    background-color: white;
+}
+
+.admin-list li {
+    padding: 6px;
+}
+
+.admin-list li:nth-child(even) {
+    background-color: white;
+}
+
+.admin-list li:nth-child(odd) {
+    background-color: rgb(238, 238, 238);
+}
+
+

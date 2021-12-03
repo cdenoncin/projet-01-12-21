@@ -2,6 +2,7 @@
     <h1 class="text-3xl font-bold mb-4">Home Page</h1>
     <section class="extract bg-gray-100 p-6 w-1/2">
         <?php foreach( $args["articles"] as $article ) { ?>
+        var_dump($article);
         <div class="extract-item bg-white border-solid border-black p-4 mb-6">
             <h2 class="text-xl font-bold mb-4"><?= $article->getTitle()?></h2>
             <p><?= $article->getContent()?></p>
