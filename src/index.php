@@ -4,6 +4,7 @@ require './vendor/autoload.php';
 
 $database_connection = new \App\Database\Database();
 
+
 $manager = new \App\Manager\PostManager($database_connection->connection);
 
 $manager->getAll()[0];
@@ -37,11 +38,21 @@ function render($title, $view, $args)
      require  "app/views/template.php";
 }
 
+// $postManager = new \App\Manager\PostManager($database_connection->connection);
+// $commentManager = new \App\Manager\CommentManager($database_connection->connection);
+// $userManager = new \App\Manager\UserManager($database_connection->connection);
+
+// $postManager->getAll()[0];
+// $commentManager->getAll()[0];
+// $userManager->getAll()[0];
+
+
 
 // $manager->render("Article", "article", ["articles" => $manager->getAll()[0]]);
 // $manager->render("Login", "login", ["title" => "TEST"]);
 // $manager->render("Write Article", "writearticle", ["title" => "TEST"]);
 // $manager->render("Home Page", "homepage", ["articles" =>$manager->getAll()]);
+
 function error () {
     render("Error404", "error404", ["title" => "TEST"] );
 }
@@ -70,6 +81,14 @@ function error () {
      render("Userlist", "userlist", ["title" => "TEST"]);
 } else if ($address[1] === "writearticle") {
      render("Writearticle", "", ["title" => "TEST"]);
+} else if ($address[1] === "updatearticle") {
+     render("Updatearticle", "", ["title" => "TEST"]);
 } else {
     error();
 }
+
+
+// $postManager->render("Article", "updatearticle", ["articles" => $postManager->getAll()[0], "comments" => $commentManager->getAll(), "users" => $userManager->getAll()]);
+// $postManager->render("Home Page", "homepage", ["articles" => $postManager->getAll(), "comments" => $commentManager->getAll(), "users" => $userManager->getAll()]);
+
+
