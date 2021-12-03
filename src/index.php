@@ -16,6 +16,7 @@ $userManager->getAll()[0];
 // $manager->render("Article", "article", ["articles" => $manager->getAll()[0]]);
 // $manager->render("Login", "login", ["title" => "TEST"]);
 
-$postManager->render("Article", "updatearticle", ["articles" => $postManager->getAll()[0], "comments" => $commentManager->getAll(), "users" => $userManager->getAll()]);
+// $postManager->render("Article", "article", ["articles" => $postManager->getAll()[0], "comments" => $commentManager->getAll(), "users" => $userManager->getAll()]);
+$userManager->render("Login", "login", ["title" => "TEST"]);
 // $postManager->render("Home Page", "homepage", ["articles" => $postManager->getAll(), "comments" => $commentManager->getAll(), "users" => $userManager->getAll()]);
 
