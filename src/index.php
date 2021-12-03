@@ -18,11 +18,12 @@ echo json_encode($manager->getAll(), JSON_PRETTY_PRINT);
 //$manager->render("Article", "article", ["title" => "TEST"]);
  */
 
-$page = $_GET['page'] ?? '404';
-echo $page;
-if ($page === 'test') {
-    // require '../../api/src/Test.php';
-}
-else if ($page === '404') {
-  //  require 'front/errors404.php';
+$address =  explode("/", $_SERVER['REQUEST_URI']);
+$method =  $_SERVER['REQUEST_METHOD'];
+echo json_encode($address);
+if($address[1] === "api") {
+    echo "api";
+    
+} else {
+   echo "not api";
 }
