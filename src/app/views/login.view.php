@@ -1,4 +1,4 @@
-<?php
+<?php /*
 $database_connection = new \App\Database\Database();
 
 $firstName = $_POST['first_name'];
@@ -12,8 +12,9 @@ if ($isAdmin == 'on') {
 }
 
 $userManager = new \App\Manager\UserManager($database_connection->connection);
-$userManager->create($_POST)
+$userManager->create($_POST) */
 ?>
+
 <div class="login-section p-16 flex flex-col items-center">
     <section class="bg-gray-100 p-6 w-1/2">
         <div class="bg-white border-solid border-black p-4">
