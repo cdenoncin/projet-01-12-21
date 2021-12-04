@@ -38,6 +38,7 @@ class CommentManager extends BaseManager
             $comment = new \App\Entity\Comment($result[0]);
             $comment->setAuthor( $this->userManager);
             $comment->setPost( $this->postManager );
+            return $comment;
         } else {
             return null;
         }
