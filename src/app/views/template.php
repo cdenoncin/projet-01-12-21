@@ -11,37 +11,48 @@
 </head>
 <body>
 <header>
-        <div class="menu flex justify-between items-center flex-wrap">
-            <ul class="flex">
-                <li class="mr-6">
-                    <a class="text-white hover:text-yellow" href="#">Home</a>
-                </li>
-                <li class="mr-6">
-                    <a class="text-white hover:text-yellow" href="#">Write article</a>
-                </li>
-                <li class="mr-6">
-                    <a class="text-white hover:text-yellow" href="#">Post API</a>
-                </li>
-                <li class="mr-6">
-                    <a class="text-white hover:text-yellow" href="#">Comments API</a>
-                </li>
-                <li class="mr-6">
-                    <a class="text-white hover:text-yellow" href="#">User list</a>
-                </li>
-            </ul>
-            <div class="flex">
-                <input class="mr-4 searchbar" type="text" id="searchbar" name="searchbar" placeholder="Search..." />
+    <div class="menu flex justify-between items-center flex-wrap">
+        <ul class="flex">
+            <li class="mr-6">
+                <a class="text-white hover:text-yellow" href="/">Home</a>
+            </li>
 
-                <button class="px-4 py-2 border-solid border-2 border-white text-white"
-                        type="button">
-                    Admin
-                </button>
-                <button class="ml-4 px-4 py-2 bg-yellow-200"
-                        type="button">
+            <?php if ($isUserConnected) { ?>
+                <li class="mr-6">
+                    <a class="text-white hover:text-yellow" href="/writearticle">Write article</a>
+                </li>
+                <li class="mr-6">
+                    <a class="text-white hover:text-yellow" href="/api/posts">Posts API</a>
+                </li>
+                <li class="mr-6">
+                    <a class="text-white hover:text-yellow" href="/api/comments">Comments API</a>
+                </li>
+                <li class="mr-6">
+                    <a class="text-white hover:text-yellow" href="/userlist">User list</a>
+                </li>
+            <?php } ?>
+        </ul>
+        <div class="flex">
+            <input class="mr-4 searchbar" type="text" id="searchbar" name="searchbar" placeholder="Search..."/>
+
+
+            <?php if (!$isUserConnected) { ?>
+                <a class="ml-4 px-4 py-2 bg-yellow-200"
+                   href="/login">
+                    Login
+                </a>
+            <?php } else { ?>
+                <a class="px-4 py-2 border-solid border-2 border-white text-white"
+                   href="/admin">
+                    Account
+                </a>
+                <a class="ml-4 px-4 py-2 bg-red-200"
+                   href="/logout">
                     Logout
-                </button>
-            </div>
-    </header>
+                </a>
+            <?php } ?>
+        </div>
+</header>
 <?= $content ?>
 </body>
 </html>

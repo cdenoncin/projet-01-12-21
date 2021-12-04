@@ -1,10 +1,10 @@
-<?php $article = $args["articles"] ?>
+<?php $article = $args["user"] ?>
 
 <div class="update-article-section p-16 flex flex-col items-center">
     <section class="update-article bg-gray-100 p-6 w-1/2 flex flex-col">
         <h3 class="text-xl font-bold mb-4">Modifier mon article</h3>
         <div class="update-article-item p-6 bg-white">
-            <form>
+            <form action="/result-updatearticle/<?= $article->getId()?>" method="POST">
                 <div class="update-article-item flex flex-col mb-4">
                     <label for="title" class="mb-2">Titre</label>
                     <input type="text" id="title" name="title" value="<?= $article->getTitle()?>" />
@@ -16,7 +16,7 @@
 
                 <div class="update-article-item flex flex-col">
                     <label for="image" class="mb-2">Image de l'article</label>
-                    <input class="bg-white" type="file" id="image" name="image">
+                    <input class="bg-white" type="file" id="image" name="thumbnail">
                 </div>
 
                 <button class="px-4 py-2 bg-blue-200 mt-6" type="sumbit">

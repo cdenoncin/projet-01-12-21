@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 
+use App\App;
+
 class BaseEntity {
 
 
@@ -15,7 +17,6 @@ class BaseEntity {
     {
         foreach ($data as $key => $value) {
             $method = "set".$this->dashesToCamelCase($key);
-
             if(is_callable([$this, $method])) {
                 $this->$method($value);
             }
