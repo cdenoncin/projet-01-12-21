@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 
+use App\App;
+
 class BaseEntity {
 
 

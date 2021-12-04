@@ -3,26 +3,27 @@
 namespace App\Manager;
 
 
+use App\Entity\Comment;
+
 class CommentManager extends BaseManager
 {
-    public function __construct($database_connection)
-    {
-        parent::__construct($database_connection);
 
-        $this->userManager = new UserManager($database_connection);
-        $this->postManager = new PostManager($database_connection);
+
+    public function __construct($app)
+    {
+        parent::__construct($app);
     }
 
     public function getAll()
     {
-        $query = $this->database_connection->prepare("SELECT * FROM Comments");
+        $query = $this->app->getDatabaseConnexion()->prepare("SELECT * FROM Comments");
         $query->execute();
         $result = $query->fetchAll();
         $comments = [];
         foreach ($result as $row) {
-            $comment = new \App\Entity\Comment($row);
-            $comment->setAuthor( $this->userManager);
-            $comment->setPost( $this->postManager );
+            $comment = new Comment($row);
+            $comment->setAuthor($this->app->getUserManager() );
+            $comment->setPost($this->app->getPostManager());
             $comments[] =  $comment;
         }
 
@@ -31,13 +32,12 @@ class CommentManager extends BaseManager
 
      public function get($id)
     {
-        $query = $this->database_connection->prepare("SELECT * FROM Comments where id=".$id);
+        $query = $this->app->getDatabaseConnexion()->prepare("SELECT * FROM Comments where id=".$id);
         $query->execute();
         $result = $query->fetchAll();
         if($result[0] !== null) {
-            $comment = new \App\Entity\Comment($result[0]);
-            $comment->setAuthor( $this->userManager);
-            $comment->setPost( $this->postManager );
+            $comment = new Comment($result[0]);
+            $comment->setAuthor($this->app->getUserManager());
             return $comment;
         } else {
             return null;
@@ -48,40 +48,38 @@ class CommentManager extends BaseManager
     public function create($args)
     {
         if($args["author_id"] === null || $args["post_id"] === null || $args["content" === null]) {
-            http_response_code(500);
-            echo "Aucun author_id/post_id/contenu donné, il faut au moins ca pour créer un commentaire !";
-            return;
+            return "Aucun author_id/post_id/contenu donné, il faut au moins ca pour créer un commentaire !";
         }
         if($args["id"] !== null) {
             unset($args["id"]);
         }
-        $comment = new \App\Entity\Comment($args);
+
+        $comment = new Comment($args);
         try {
-            $this->database_connection->exec($this->generateCreateQuery($comment, "Comments"));
-            echo "Nouveau commentaire enregistré ! ";
+            $this->app->getDatabaseConnexion()->exec($this->generateCreateQuery($comment, "Comments"));
+            return "Nouveau commentaire enregistré ! ";
         } catch(PDOException $e) {
-            echo $sql . "<br>" . $e->getMessage();
+            return $e->getMessage();
         }
     }
 
     public function update($args) {
         if($args["id"] === null) {
             http_response_code(500);
-            echo "Aucun id !";
-            return;
+            return "Aucun id !";
         }
-        $comment = new \App\Entity\Comment($args);
+        $comment = new Comment($args);
         try {
             // Prepare statement
-            $stmt = $this->database_connection->prepare($this->generateUpdateQuery($comment, "Comments"));
-          
+            $stmt = $this->app->getDatabaseConnexion()->prepare($this->generateUpdateQuery($comment, "Comments"));
+
             // execute the query
             $stmt->execute();
-          
+
             // echo a message to say the UPDATE succeeded
-            echo $stmt->rowCount() . " records UPDATED successfully";
+            return "Commentaire mis à jour";
           } catch(PDOException $e) {
-            echo $sql . "<br>" . $e->getMessage();
+            return $e->getMessage();
           }
 
     }
@@ -91,12 +89,40 @@ class CommentManager extends BaseManager
         try {
             // sql to delete a record
             $sql = "DELETE FROM Comments WHERE id=".$id;
-          
+
             // use exec() because no results are returned
-            $this->database_connection->exec($sql);
-            echo "Record deleted successfully";
+            $this->app->getDatabaseConnexion()->exec($sql);
+            return "Record deleted successfully";
           } catch(PDOException $e) {
-            echo $sql . "<br>" . $e->getMessage();
+            return $sql . "<br>" . $e->getMessage();
           }
+    }
+
+    public function getAllFromPost($id)
+    {
+        $query = $this->app->getDatabaseConnexion()->prepare("SELECT * FROM Comments where post_id=".$id);
+        $query->execute();
+        $result = $query->fetchAll();
+        $comments = [];
+        foreach ($result as $row) {
+            $comment = new Comment($row);
+            $comment->setAuthor($this->app->getUserManager());
+           // $comment->setPost($this->app->getPostManager());
+            $comments[] =  $comment;
+        }
+
+        return $comments;
+    }
+
+    public function renderDeleteView($postId, $commentId) {
+        $this->delete($commentId);
+        $this->app->getPostManager()->getArticleView($postId);
+    }
+
+    public function renderAddView($postId, $args) {
+        $args["post_id"] = $postId;
+        $args["author_id"] = $this->app->getSession()->getConnectedUser();
+        $this->app->getCommentManager()->create($args);
+        $this->app->getPostManager()->getArticleView($postId);
     }
 }
