@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 
+use App\Manager\CommentManager;
+
 class Post extends BaseEntity implements \JsonSerializable
 {
     private $id;
@@ -12,6 +14,7 @@ class Post extends BaseEntity implements \JsonSerializable
     private $publication_date;
     private $author_id;
     private $author;
+    private $comments;
 
 
     public function __construct($data)
@@ -26,6 +29,14 @@ class Post extends BaseEntity implements \JsonSerializable
 
     public function getAuthor() {
         return $this->author;
+    }
+
+    public function setComments(CommentManager $commentManager) {
+        $this->comments = $commentManager->getAllFromPost($this->id);
+    }
+
+    public  function getComments() {
+        return $this->comments;
     }
 
 
@@ -98,7 +109,7 @@ class Post extends BaseEntity implements \JsonSerializable
      */
     public function getPublicationDate()
     {
-        return $this->publication_date;
+        return date('d/m/Y',strtotime($this->publication_date));
     }
 
     /**
@@ -106,7 +117,7 @@ class Post extends BaseEntity implements \JsonSerializable
      */
     public function setPublicationDate($publication_date)
     {
-        $this->publication_date = $publication_date;
+        $this->publication_date =  $publication_date;
     }
 
     /**

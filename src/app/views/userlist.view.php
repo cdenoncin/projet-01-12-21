@@ -18,9 +18,13 @@
                 <p class="w-1/5"><?= $user->getLastName() ?></p>
                 <p class="w-1/5"><?= $user->getMail() ?></p>
                 <div class="w-1/5">
-                    <input type="checkbox" id="isadmin" name="isadmin" <?php if($user->getIsAdmin() == '1') { echo ('checked'); }  ?>>
+                    <input type="checkbox" id="isadmin" name="isadmin" disabled <?php if($user->getIsAdmin() == '1') { echo ('checked'); }  ?>>
                 </div>
-                <a href="" class="w-1/5 underline">Delete user</a>
+                <?php if($idUserConnected !== $user->getId()) { ?>
+                    <a href="/delete-user/<?= $user->getId() ?>" class="w-1/5 underline">Delete user</a>
+                <?php } else { ?>
+                    <a class="w-1/5 underline opacity-30 cursor-default">Delete user</a>
+                <?php  } ?>
             </li>
             <?php } ?>
         </ul>

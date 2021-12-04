@@ -20,7 +20,7 @@ class User extends BaseEntity implements  \JsonSerializable
     public function getProperties() {
         return get_object_vars($this);
     }
-    
+
 
 
     /**
