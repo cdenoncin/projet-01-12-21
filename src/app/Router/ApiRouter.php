@@ -15,11 +15,11 @@ class ApiRouter extends BaseRouter{
     private $method;
     private $url;
 
-    public function __construct($method, $url) {
+    public function __construct($method, $url, $app) {
         $this->method = $method;
         $this->url = $url;
       //  echo print_r($url) . $method;
-        parent::__construct();
+        parent::__construct($app);
         $this->manager = $this->getManager($this->url[2]);
 
         if(!empty($this->manager)) {

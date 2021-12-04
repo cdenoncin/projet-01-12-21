@@ -23,7 +23,8 @@ class SessionManager extends BaseManager
     }
 
     public function createUserView() {
-        $this->renderTitleText("Inscription", "Résultat", $this->app->getUserManager()->create($_POST));
+        $result =  $this->app->getUserManager()->create($_POST);
+        $this->renderTitleText("Inscription", "Résultat", $result);
     }
     public function logoutView() {
         $this->renderTitleText("Login", "Résultat", $this->app->getSession()->logout());
