@@ -50,9 +50,9 @@ class ViewRouter
             case "login" :
                 $app->getSessionManager()->getLoginView();
                 break;
-            case "admin" :
-                $app->getUserManager()->getAdminView();
-                break;
+            // case "admin" :
+            //     $app->getUserManager()->getAdminView();
+            //     break;
             case "log-user":
                 $app->getSessionManager()->logUserView();
                 break;
@@ -73,6 +73,12 @@ class ViewRouter
                 break;
             case "updatearticle":
                 $app->getPostManager()->updatePostView($url[2]);
+                break;
+            case "result-updateadmin":
+                $app->getUserManager()->resultUpdateAdminView($_POST, $url[2]);
+                break;
+            case "admin":
+                $app->getUserManager()->updateAdminView();
                 break;
             case "add-comment":
                 $app->getCommentManager()->renderAddView($url[2], $_POST);

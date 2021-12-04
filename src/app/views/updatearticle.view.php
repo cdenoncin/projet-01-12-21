@@ -1,4 +1,4 @@
-<?php $article = $args["update"] ?>
+<?php $article = $args["user"] ?>
 
 <div class="update-article-section p-16 flex flex-col items-center">
     <section class="update-article bg-gray-100 p-6 w-1/2 flex flex-col">

@@ -76,8 +76,8 @@ class UserManager extends BaseManager
         if($args["id"] !== null) {
             unset($args["id"]);
         }
-        if ($_POST['is_admin'] == 'on') {
-            $_POST['is_admin'] = 1;
+        if ($args['is_admin'] == 'on') {
+            $args['is_admin'] = 1;
         }
         $user = new User($args);
         try {
@@ -92,6 +92,9 @@ class UserManager extends BaseManager
         if($args["id"] === null) {
             http_response_code(500);
             return "Aucun id !";
+        }
+        if ($args['is_admin'] == 'on') {
+            $args['is_admin'] = 1;
         }
         $user = new User($args);
         try {
@@ -131,8 +134,19 @@ class UserManager extends BaseManager
         $this->renderTitleText("Suppression Utilisateur", "Résultat", $this->delete($id));
     }
 
-    public function getAdminView()
+    // public function getAdminView()
+    // {
+    //     $this->render("Admin", "admin", ["user" => $this->get($this->app->getSession()->getConnectedUser())]);
+    // }
+
+    public function updateAdminView()
     {
-        $this->render("Admin", "admin", ["user" => $this->get($this->app->getSession()->getConnectedUser())]);
+        $this->render("Modifier le compte", "admin", ["updateuser" => $this->get($this->app->getSession()->getConnectedUser())]);
+    }
+
+    public function resultUpdateAdminView($args, $id)
+    {
+        $args['id'] = $id;
+        $this->renderTitleText("Résultat", "Résultat", $this->update($args));
     }
 }
