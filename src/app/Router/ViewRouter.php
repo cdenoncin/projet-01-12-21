@@ -44,16 +44,26 @@ class ViewRouter
                 if (!empty($url[2])) {
                     $app->getPostManager()->getArticleView($url[2]);
                 } else {
-                    $app->getPostManager()->render404();
+                    header("LOCATION: /");
                 }
                 break;
             case "login" :
                 $app->getSessionManager()->getLoginView();
                 break;
+            case "logout" :
+                $app->getSessionManager()->logoutView();
+                break;
+            case "inscription" :
+                $app->getSessionManager()->createUserView();
+                break;
             case "admin" :
                 $app->getUserManager()->getAdminView();
                 break;
+            case "userlist" :
+                $app->getUserManager()->getAllUsersView();
+                break;
             case "log-user":
+                header("LOCATION: /");
                 $app->getSessionManager()->logUserView();
                 break;
             case "" :
@@ -66,12 +76,15 @@ class ViewRouter
                 $app->getPostManager()->resultCreatePostView($_POST);
                 break;
             case "deletearticle":
+                header("LOCATION: /");
                 $app->getPostManager()->resultDeletePostView($url[2]);
                 break;
             case "add-comment":
+                header("LOCATION: /articles".$url[2]);
                 $app->getCommentManager()->renderAddView($url[2], $_POST);
                 break;
             case "delete-comment":
+                header("LOCATION: /articles".$url[2]);
                 $app->getCommentManager()->renderDeleteView($url[2], $url[3] );
                 break;
             default :

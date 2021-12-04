@@ -11,41 +11,42 @@
 </head>
 <body>
 <header>
-        <div class="menu flex justify-between items-center flex-wrap">
-            <ul class="flex">
+    <div class="menu flex justify-between items-center flex-wrap">
+        <ul class="flex">
+            <li class="mr-6">
+                <a class="text-white hover:text-yellow" href="/">Home</a>
+            </li>
+
+            <?php if ($isUserConnected) { ?>
                 <li class="mr-6">
-                    <a class="text-white hover:text-yellow" href="/">Home</a>
+                    <a class="text-white hover:text-yellow" href="/writearticle">Write article</a>
                 </li>
+                <li class="mr-6">
+                    <a class="text-white hover:text-yellow" href="/userlist">User list</a>
+                </li>
+            <?php } ?>
+        </ul>
+        <div class="flex">
+            <input class="mr-4 searchbar" type="text" id="searchbar" name="searchbar" placeholder="Search..."/>
 
-                <?php if ($isUserConnected) { ?>
-                    <li class="mr-6">
-                        <a class="text-white hover:text-yellow" href="/writearticle">Write article</a>
-                    </li>
-                    <li class="mr-6">
-                        <a class="text-white hover:text-yellow" href="/userlist">User list</a>
-                    </li>
-                <?php } ?>
-            </ul>
-            <div class="flex">
-                <input class="mr-4 searchbar" type="text" id="searchbar" name="searchbar" placeholder="Search..." />
 
+            <?php if (!$isUserConnected) { ?>
+                <a class="ml-4 px-4 py-2 bg-yellow-200"
+                   href="/login">
+                    Login
+                </a>
+            <?php } else { ?>
                 <a class="px-4 py-2 border-solid border-2 border-white text-white"
-                        href="/admin">
+                   href="/admin">
                     Account
                 </a>
-                <?php if (!$isUserConnected) { ?>
-                    <a class="ml-4 px-4 py-2 bg-yellow-200"
-                            href="/login">
-                        Login
-                    </a>
-                <?php } else { ?>
-                    <a class="ml-4 px-4 py-2 bg-red-200"
-                            href="/logout">
-                        Logout
-                    </a>
-                <?php } ?>
-            </div>
-    </header>
-    <?= $content ?>
+                <a class="ml-4 px-4 py-2 bg-red-200"
+                   href="/logout">
+                    Logout
+                </a>
+            <?php } ?>
+        </div>
+</header>
+<?= $content ?>
 </body>
 </html>

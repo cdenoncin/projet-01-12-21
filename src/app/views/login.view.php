@@ -2,7 +2,7 @@
     <section class="bg-gray-100 p-6 w-1/2">
         <div class="bg-white border-solid border-black p-4">
             <h2 class="text-xl font-bold mb-4">Inscription</h2>
-            <form action="index.php" method="POST" class="bg-white p-4">
+            <form action="inscription" method="POST" class="bg-white p-4">
                 <div class="flex flex-col mb-4">
                     <label for="firstname" class="mb-2">First Name</label>
                     <input required="required" type="text" id="firstname" name="first_name" />

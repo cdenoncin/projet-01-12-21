@@ -76,8 +76,8 @@ class UserManager extends BaseManager
         if($args["id"] !== null) {
             unset($args["id"]);
         }
-        if ($_POST['is_admin'] == 'on') {
-            $_POST['is_admin'] = 1;
+        if ($args['is_admin'] === 'on') {
+            $args['is_admin'] = 1;
         }
         $user = new User($args);
         try {

@@ -44,6 +44,21 @@ class Session
             return "Il manque le mail ou le mot de passe";
         }
     }
+
+    public function connectWithId($id) {
+        $this->user = $this->app->getUserManager()->get($id);
+        echo $this->user;
+        if($this->user) {
+            session_start();
+            $_SESSION["user"]= $this->user->getId();
+
+            //echo print_r($_SESSION);
+            return "Vous êtes bien connectés";
+        } else {
+            return "Mot de passe erroné ou compte inexistant";
+        }
+    }
+
     public function logout() {
         session_start();
         unset($_SESSION["user"]);
