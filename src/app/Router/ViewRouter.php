@@ -12,31 +12,6 @@ class ViewRouter
 
     public function route($url, App $app)
     {
-        /*
-        if ($url[1] === "admin") {
-            render("Admin", "admin", ["title" => "TEST"]);
-        } else if ($url[1] === "") {
-            $app->getPostManager()->getAllPostsView();
-
-        } else if ($url[1] === "userlist") {
-            $app->getUserManager()->getAllUsersView();
-        } else if ($url[1] === "writearticle") {
-            $app->getPostManager()->createPostView();
-        } else if ($url[1] === "updatearticle") {
-            render("Updatearticle", "updatearticle", []);
-        } else if ($url[1] === "inscription") {
-            $app->getSessionManager()->createUserView();
-        } else if ($url[1] === "logout") {
-            $app->getSessionManager()->logoutView();
-        } else if ($url[1] === "createarticle") {
-            $app->getPostManager()->resultCreatePostView($_POST);
-        } else if ($url[1] === "delete-user") {
-            $app->getUserManager()->deleteUserView($url[2]);
-        } else {
-            $app->getPostManager()->render404();
-        }
-
-        */
 
 
         switch ($url[1]) {
