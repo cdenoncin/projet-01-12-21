@@ -68,6 +68,12 @@ class ViewRouter
             case "deletearticle":
                 $app->getPostManager()->resultDeletePostView($url[2]);
                 break;
+            case "result-updatearticle":
+                $app->getPostManager()->resultUpdatePostView($_POST, $url[2]);
+                break;
+            case "updatearticle":
+                $app->getPostManager()->updatePostView($url[2]);
+                break;
             case "add-comment":
                 $app->getCommentManager()->renderAddView($url[2], $_POST);
                 break;

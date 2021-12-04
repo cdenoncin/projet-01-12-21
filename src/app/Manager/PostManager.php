@@ -151,4 +151,15 @@ class PostManager extends BaseManager
     {
         $this->renderTitleText("Résultat", "Résultat", $this->delete($id));
     }
+
+    public function updatePostView($id)
+    {
+        $this->render("Modifier l'article", "updatearticle", ["update" => $this->get($id)]);
+    }
+
+    public function resultUpdatePostView($args, $id)
+    {
+        $args['id'] = $id;
+        $this->renderTitleText("Résultat", "Résultat", $this->update($args));
+    }
 }
