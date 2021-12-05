@@ -34,6 +34,7 @@ class Session
             if($this->user) {
                 session_start();
                 $_SESSION["user"]= $this->user->getId();
+                $this->isUserConnected = true;
 
                 //echo print_r($_SESSION);
                 return "Vous êtes bien connectés";
@@ -51,7 +52,7 @@ class Session
         if($this->user) {
             session_start();
             $_SESSION["user"]= $this->user->getId();
-
+            $this->isUserConnected = true;
             //echo print_r($_SESSION);
             return "Vous êtes bien connectés";
         } else {
@@ -62,6 +63,7 @@ class Session
     public function logout() {
         session_start();
         unset($_SESSION["user"]);
+        $this->isUserConnected = false;
         return "Vous êtes bien déconnecté";
     }
 

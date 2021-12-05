@@ -8,18 +8,20 @@ use App\Manager\CommentManager;
 use App\Manager\PostManager;
 use App\Manager\UserManager;
 
-class ApiRouter extends BaseRouter{
+class ApiRouter {
 
 
     private $manager;
     private $method;
     private $url;
+    private $app;
 
     public function __construct($method, $url, $app) {
         $this->method = $method;
         $this->url = $url;
-      //  echo print_r($url) . $method;
-        parent::__construct($app);
+
+        $this->app = $app;
+
         $this->manager = $this->getManager($this->url[2]);
 
         if(!empty($this->manager)) {

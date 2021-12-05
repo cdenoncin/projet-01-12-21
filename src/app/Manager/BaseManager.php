@@ -27,6 +27,7 @@ class BaseManager
     public function render($title, $view, $args = [])
     {
         $idUserConnected = $this->app->getSession()->getConnectedUser();
+        $isUserConnected = $this->app->getSession()->isUserConnected();
         $view = $this->viewDir . $view . ".view.php";
         ob_start();
         require $view;

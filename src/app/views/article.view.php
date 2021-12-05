@@ -25,14 +25,15 @@
         <div class="comments-item p-6 bg-white">
             <p class="mb-1">Écrit par : <span class="italic"><?= $comment->getAuthor()->getFirstName() ?> <?= $comment->getAuthor()->getLastName() ?></span></p>
             <p><?= $comment->getContent()?></p>
-            <!-- TODO : Dynamiser le bouton delete / Le bouton doit supprimer la ligne de la bdd -->
+            <?php if ($isUserConnected) { ?>
             <a class="px-4 py-2 bg-red-200 mt-6" href="/delete-comment/<?= $article->getId() ?>/<?= $comment->getId() ?>">
                 Delete comment
             </a>
+            <?php } ?>
         </div>
         <?php } ?>
     </section>
-
+    <?php if ($isUserConnected) { ?>
     <section class="add-comments bg-gray-100 p-6 w-1/2 flex flex-col">
         <h3 class="text-xl font-bold mb-4">Écrire un commentaire</h3>
         <div class="comments-item p-6 bg-white">
@@ -48,4 +49,5 @@
             </form>
         </div>
     </section>
+    <?php } ?>
 </div>

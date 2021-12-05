@@ -69,20 +69,7 @@ class PostManager extends BaseManager
         if ($this->app->getSession()->isUserConnected()) {
             $args["publication_date"] = (string)date('Y-m-d H:i:s');
             $args["author_id"] = $this->app->getSession()->getConnectedUser();
-
-            if (isset($_FILES["thumbnail"])) {
-                if ($_FILES["file"]["error"] > 0) {
-                    return "Error with image - Code: " . $_FILES["file"]["error"] . "<br>";
-                } else {
-                    if (file_exists("upload/" . $_FILES["thumbnail"]["name"])) {
-                        return $_FILES["thumbnail"]["name"] . " already exists. ";
-                    } else {
-                        move_uploaded_file($_FILES["thumbnail"]["tmp_name"],
-                            "upload/" . $_FILES["thumbnail"]["name"]);
-                        $args["thumbnail_url"] = "/upload/" . $_FILES["thumbnail"]["name"];
-                    }
-                }
-            }
+            $args["thumbnail_url"] = $this->generateThumbUrl();
             $post = new Post($args);
             try {
                 $this->app->getDatabaseConnexion()->exec($this->generateCreateQuery($post, "Posts"));
@@ -97,12 +84,32 @@ class PostManager extends BaseManager
 
     }
 
+    private function generateThumbUrl()
+    {
+        $result = null;
+        if (isset($_FILES["thumbnail"])) {
+            if ($_FILES["thumbnail"]["error"] > 0) {
+                echo "Error with image - Code: " . $_FILES["thumbnail"]["error"] . "<br>";
+            } else {
+                if (file_exists("upload/" . $_FILES["thumbnail"]["name"])) {
+                    $result = "/upload/" . $_FILES["thumbnail"]["name"];
+                } else {
+                    move_uploaded_file($_FILES["thumbnail"]["tmp_name"],
+                        "upload/" . $_FILES["thumbnail"]["name"]);
+                    $result = "/upload/" . $_FILES["thumbnail"]["name"];
+                }
+            }
+        }
+        return $result;
+    }
+
     public function update($args)
     {
         if ($args["id"] === null) {
             http_response_code(500);
             return "Aucun id !";
         }
+        $args["thumbnail_url"] = $this->generateThumbUrl();
         $post = new Post($args);
         try {
             // Prepare statement
@@ -147,6 +154,7 @@ class PostManager extends BaseManager
     {
         $this->renderTitleText("Résultat", "Résultat", $this->create($args));
     }
+
     public function resultDeletePostView($id)
     {
         $this->renderTitleText("Résultat", "Résultat", $this->delete($id));
@@ -154,12 +162,13 @@ class PostManager extends BaseManager
 
     public function updatePostView($id)
     {
-        $this->render("Modifier l'article", "updatearticle", ["update" => $this->get($id)]);
+        $this->render("Modifier l'article", "updatearticle", ["article" => $this->get($id)]);
     }
 
     public function resultUpdatePostView($args, $id)
     {
         $args['id'] = $id;
-        $this->renderTitleText("Résultat", "Résultat", $this->update($args));
+        $this->update($args);
+        $this->getArticleView($id);
     }
 }

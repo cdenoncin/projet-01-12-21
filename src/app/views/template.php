@@ -17,16 +17,21 @@
                 <a class="text-white hover:text-yellow" href="/">Home</a>
             </li>
 
+            <li class="mr-6">
+                <a class="text-white hover:text-yellow" href="/api/posts">Posts API</a>
+            </li>
+            <li class="mr-6">
+                <a class="text-white hover:text-yellow" href="/api/comments">Comments API</a>
+            </li>
+            <li class="mr-6">
+                <a class="text-white hover:text-yellow" href="/api/users">Users API</a>
+            </li>
+
             <?php if ($isUserConnected) { ?>
                 <li class="mr-6">
                     <a class="text-white hover:text-yellow" href="/writearticle">Write article</a>
                 </li>
-                <li class="mr-6">
-                    <a class="text-white hover:text-yellow" href="/api/posts">Posts API</a>
-                </li>
-                <li class="mr-6">
-                    <a class="text-white hover:text-yellow" href="/api/comments">Comments API</a>
-                </li>
+
                 <li class="mr-6">
                     <a class="text-white hover:text-yellow" href="/userlist">User list</a>
                 </li>

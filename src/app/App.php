@@ -31,6 +31,10 @@ class App {
      * @var Manager\CommentManager
      */
     protected $commentManager;
+    /**
+     * @var Router\Router
+     */
+    private $router;
 
     public function __construct()
     {
@@ -49,8 +53,9 @@ class App {
             $this->commentManager = new Manager\CommentManager($this);
             $this->postManager = new Manager\PostManager($this);
 
-
             $this->router = new Router\Router($this);
+
+
         } catch(PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         }
@@ -83,6 +88,24 @@ class App {
     {
         return $this->postManager;
     }
+
+    /**
+     * @return Router\Router
+     */
+    public function getRouter()
+    {
+        return $this->router;
+    }
+
+    /**
+     * @param Router\Router $router
+     */
+    public function setRouter($router)
+    {
+        $this->router = $router;
+    }
+
+
 
     /**
      * @param Manager\PostManager $postManager
